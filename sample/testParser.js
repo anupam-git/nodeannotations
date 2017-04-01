@@ -6,18 +6,17 @@ AnnotationParser.parse(
     (err, annotatedElements) => {
         if (err) {
             console.log(err);
-        } else {
-            for (let i in annotatedElements) {
-                let annotatedElement = annotatedElements[i];
-                console.log(annotatedElement.getName()+" : "+annotatedElement.getType());
+        }
+        for (let i in annotatedElements) {
+            let annotatedElement = annotatedElements[i];
+            console.log(annotatedElement.getName()+" : "+annotatedElement.getType());
 
-                let elementAnnotations = annotatedElement.getAnnotations();
+            let elementAnnotations = annotatedElement.getAnnotations();
 
-                for (let i in elementAnnotations) {
-                    console.log("\t"+elementAnnotations[i].getName());
-                }
-
-                console.log();
+            for (let i in elementAnnotations) {
+                console.log("\t"+JSON.stringify(elementAnnotations[i]));
             }
+
+            console.log();
         }
     });

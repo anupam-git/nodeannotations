@@ -1,6 +1,6 @@
 const Annotation = require(__dirname+"/../../src/Annotation");
 
-class Request extends Annotation {
+class Simple extends Annotation {
     constructor() {
         super();
 
@@ -8,4 +8,4 @@ class Request extends Annotation {
     }
 }
 
-module.exports = Request;
+module.exports = Simple;
