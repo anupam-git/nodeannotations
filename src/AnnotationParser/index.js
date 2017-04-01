@@ -9,36 +9,65 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
      * Matched Block 2 : function | class | let | const | var
      * Matched Block 3 : Function / Class / Variable Name
      */
-    let annotationBlockRegex = /((?:[\t ]*\* @\w+\(\)[\n\t ]*)+\*\/)[\n\r][\t ]*(function|class|var|let|const) (\w+)/g;
+    let annotationBlockRegex = /((?:[\t ]*\* @\w+\([\w `~!@#$%^&*()_\-+=|\\}\]{[\"':;?/>.<,]*\)[\n\t ]*)+\*\/)[\n\r][\t ]*(function|class|var|let|const) (\w+)/g;
 
     /**
      * Annotation REGEX
      * 
      * Matched Pattern : Annotation()
      */
-    let annotationRegex = /@(\w+)\(\)/g;
+    let annotationRegex = /@(\w+)\(([\w `~!@#$%^&*()_\-+=|\\}\]{[\"':;?/>.<,]*)\)/g;
+
+    /**
+     * Arguments REGEX
+     * 
+     * Matched Block 1 : Argument Name
+     * Matched Block 2 : Argument Value
+     */
+    let argsRegex = /(\w+)=\"([\w`~!@#$%^&*()_\-+=|\\}\]{[\"':;?/>.<,]*)\"/g;
 
     let annotatedFile = fs.readFileSync(filePath, 'utf8');
     let elementType, elementName;
-    let matchedBlock, matchedAnnotation;
+    let matchedBlock, matchedAnnotation, matchedArg;
     let matches = [];
     let err = null;
 
     while (matchedBlock = annotationBlockRegex.exec(annotatedFile)) {
         let elementAnnotations = [];
+        let breakError = false;
 
         while (matchedAnnotation = annotationRegex.exec(matchedBlock[1])) {
-            // console.log("\t\t"+matchedAnnotation)
-
+            // console.log("\t\t"+JSON.stringify(matchedAnnotation));
+            
+            let argsCount = 0;
+            
             try {
                 let CustomAnnotation = require(annotationsPath+"/"+matchedAnnotation[1]);
                 let cAnnotation = new CustomAnnotation();
 
+                try {
+                    while (matchedArg = argsRegex.exec(matchedAnnotation[2])) {
+                        argsCount++;
+
+                        cAnnotation.set(matchedArg[1], matchedArg[2]);
+                    }
+
+                    if (matchedAnnotation[2] == "" || (argsCount == 0 && matchedAnnotation[2] != "")) {
+                        cAnnotation.set("value", matchedAnnotation[2]);
+                    }
+                } catch (e) {
+                    err = e;
+                    matches = null;
+                    breakError = true;
+
+                    break;
+                }
+
                 elementAnnotations.push(cAnnotation);
             } catch (e) {
-                err = new Error("Undefined Annotation")
+                err = new Error("Cannot Find Annotation "+matchedAnnotation[1]);
 
-                break;
+                continue;
             }
         }
 
@@ -61,17 +90,18 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
         // console.log("Iteration");
         // console.log("\tAnnotations :");
 
-
-        let element = new AnnotatedElement(elementName, elementType, elementAnnotations);
-        matches.push(element);
+        if (!breakError) {
+            if (elementAnnotations.length > 0) {
+                let element = new AnnotatedElement(elementName, elementType, elementAnnotations);
+                matches.push(element);
+            }
+        } else {
+            break;
+        }
 
         // console.log("\tElement Type : " + elementType);
         // console.log("\tElement Name : " + elementName);
     }
 
-    if (err) {
-        cb(err, null);
-    } else {
-        cb(null, matches);
-    }
+    cb(err, matches);
 };
