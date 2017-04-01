@@ -1,11 +1,11 @@
 class Annotation {
-    constructor(name) {
-        this.name = name;
+    constructor() {
+        this.value = null;
     }
 
-    getName() { return this.name; }
+    value() { return this.value; }
 
-    setName(name) { this.name = name; }
+    set(name, value) { this[name] = value; }
 }
 
 module.exports = Annotation;
