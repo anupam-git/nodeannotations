@@ -53,7 +53,13 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
                     }
 
                     if (matchedAnnotation[2] == "" || (argsCount == 0 && matchedAnnotation[2] != "")) {
-                        cAnnotation.set("value", matchedAnnotation[2]);
+                        let value = matchedAnnotation[2];
+                        
+                        if(value.startsWith("\"") && value.endsWith("\"")) {
+                            value = value.substr(1, value.length-2);
+                        }
+
+                        cAnnotation.set("value", value);
                     }
                 } catch (e) {
                     err = e;
@@ -65,9 +71,11 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
 
                 elementAnnotations.push(cAnnotation);
             } catch (e) {
-                err = new Error("Cannot Find Annotation "+matchedAnnotation[1]);
-
-                continue;
+                err = new Error("Cannot Find Annotation "+matchedAnnotation[1]+" ("+annotationsPath+"/"+matchedAnnotation[1]+")");
+                breakError = true;
+                matches = null;
+                
+                break;
             }
         }
 
@@ -102,6 +110,25 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
         // console.log("\tElement Type : " + elementType);
         // console.log("\tElement Name : " + elementName);
     }
+
+    matches.filterBy = (objectOf) => {
+        if (objectOf == "" || objectOf == undefined) {
+            return matches;
+        } else {
+            return matches.filter((e) => {
+                let found = false;
+
+                for (i in e.annotations) {
+                    if (e.annotations[i].objectOf == objectOf) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                return found;
+            });
+        }
+    };
 
     cb(err, matches);
 };
