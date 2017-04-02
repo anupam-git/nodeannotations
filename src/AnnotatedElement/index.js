@@ -14,8 +14,13 @@ module.exports = class AnnotatedElement {
     getName() { return this.name; }
     getType() { return elementType[this.type]; }
     getAnnotations() { return this.annotations; }
+    getAnnotation(objectOf) {
+        return this.annotations.filter((e) => {
+            return e.objectOf == objectOf;
+        })[0];
+    }
 
-    setType(name) { this.name = name; }
+    setName(name) { this.name = name; }
     setType(type) { this.type = type; }
     setAnnotations(annotations) { this.annotations = annotations; }
 };
