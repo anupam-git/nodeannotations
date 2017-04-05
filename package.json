@@ -1,6 +1,6 @@
 {
   "name": "nodeannotations",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "NodeJS Support for Annotations",
   "main": "index.js",
   "scripts": {
