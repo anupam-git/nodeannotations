@@ -111,24 +111,30 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
         // console.log("\tElement Name : " + elementName);
     }
 
-    matches.filterBy = (objectOf) => {
-        if (objectOf == "" || objectOf == undefined) {
-            return matches;
-        } else {
-            return matches.filter((e) => {
-                let found = false;
+    if (err) {
+        throw err;
 
-                for (i in e.annotations) {
-                    if (e.annotations[i].objectOf == objectOf) {
-                        found = true;
-                        break;
+        return null;
+    } else {
+        matches.filterBy = (objectOf) => {
+            if (objectOf == "" || objectOf == undefined) {
+                return matches;
+            } else {
+                return matches.filter((e) => {
+                    let found = false;
+
+                    for (i in e.annotations) {
+                        if (e.annotations[i].objectOf == objectOf) {
+                            found = true;
+                            break;
+                        }
                     }
-                }
 
-                return found;
-            });
-        }
-    };
-
-    cb(err, matches);
+                    return found;
+                });
+            }
+        };
+        
+        return matches;
+    }
 };
