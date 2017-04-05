@@ -1,7 +1,12 @@
 class Annotation {
     constructor(objectOf) {
+        if (objectOf == undefined) {
+            throw new Error("Call to super(String annotationName) is required ");
+        }
+
         this.value = null;
         this.objectOf = objectOf;
+
     }
 
     value() { return this.value; }
