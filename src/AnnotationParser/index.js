@@ -9,7 +9,7 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
      * Matched Block 2 : function | class | let | const | var
      * Matched Block 3 : Function / Class / Variable Name
      */
-    let annotationBlockRegex = /((?:[\t ]*\* @\w+\([\w `~!@#$%^&*()_\-+=|\\}\]{[\"':;?/>.<,]*\)[\n\t ]*)+\*\/)[\n\r][\t ]*(function|class|var|let|const) (\w+)/g;
+    let annotationBlockRegex = /((?:[\t ]*\* @\w+\([\w `~!@#$%^&*()_\-+=|\\}\]{[\"':;?/>.<,]*\)[\n\t ]*)+\*\/)[\n\r][\t ]*(?:(function|class|var|let|const) )*(\w+)/g;
 
     /**
      * Annotation REGEX
@@ -81,6 +81,7 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
 
         switch (matchedBlock[2]) {
             case "function":
+            case "":
                 elementType = AnnotatedElement.TYPE_METHOD;
                 break;
             case "class":
