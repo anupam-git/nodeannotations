@@ -119,7 +119,9 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
     } else {
         matches.filterBy = (objectOf) => {
             if (objectOf == "" || objectOf == undefined) {
-                return matches;
+                return matches.filter((e) => {
+                    return typeof e != "function";
+                });
             } else {
                 return matches.filter((e) => {
                     let found = false;
