@@ -4,7 +4,6 @@
 
 ## Table of Contents
 * [Getting Started](#getting-started)
-* [Usage](#usage)
 * [Class : Annotation(objectOf)](#class--annotation)
     * [Annotation.value](#annotationvalue)
     * [Annotation.[param]](#annotationparam)
