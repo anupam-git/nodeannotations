@@ -1,7 +1,7 @@
 const fs = require("fs");
 const AnnotatedElement = require(__dirname+"/../AnnotatedElement");
 
-module.exports.parse = (filePath, annotationsPath, cb) => {
+module.exports.parse = (filePath, annotationsPath) => {
     /**
      * Annotation Block REGEX
      * 

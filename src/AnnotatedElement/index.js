@@ -19,10 +19,6 @@ module.exports = class AnnotatedElement {
             return e.objectOf == objectOf;
         })[0];
     }
-
-    setName(name) { this.name = name; }
-    setType(type) { this.type = type; }
-    setAnnotations(annotations) { this.annotations = annotations; }
 };
 
 module.exports.TYPE_CLASS = 0;
