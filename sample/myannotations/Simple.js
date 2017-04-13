@@ -1,10 +1,8 @@
-const Annotation = require(__dirname+"/../../src/Annotation");
+const {Annotation} = require(__dirname+"/../../");
 
 class Simple extends Annotation {
     constructor() {
         super("Simple");
-
-        // console.log("Annotation : Request");
     }
 }
 
