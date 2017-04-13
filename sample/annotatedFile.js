@@ -18,7 +18,7 @@ class Test {
         let a;
 
         /**
-         * @Path(dir="/home/anupam1", param="`~!@#$%^&*()_-+=|\\}]{[\"':;?/>.<,sagyud")
+         * @Path(dir="/home/user", param="`~!@#$%^&*()_-+=|\\}]{[\"':;?/>.<,sagyud")
          */
         const b;
 
@@ -26,5 +26,12 @@ class Test {
          * @Request("/controller3/endpoint3/param3")
          */
         var c;
+    }
+
+    /**
+     * @Path(dir="/home")
+     */
+    testFunction(req) {
+
     }
 }
