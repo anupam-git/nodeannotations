@@ -1,7 +1,7 @@
 /**
  * @Simple()
  * @Request("/controller/endpoint/param")
- * @Path(dir="/home/anupam", param="`~!@#$%^&*()_-+=|\\}]{[\"':;?/>.<,")
+ * @Path(dir="/home/user1", param="somevalue")
  */
 function test() {
     console.log("In Function test");
@@ -18,7 +18,7 @@ class Test {
         let a;
 
         /**
-         * @Path(dir="/home/user", param="`~!@#$%^&*()_-+=|\\}]{[\"':;?/>.<,sagyud")
+         * @Path(dir="/home/user2", param="someothervalue")
          */
         const b;
 
@@ -29,7 +29,7 @@ class Test {
     }
 
     /**
-     * @Path(dir="/home")
+     * @Path(dir="/home", param="test123")
      */
     testFunction(req) {
 
