@@ -81,17 +81,21 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
 
         switch (matchedBlock[2]) {
             case "function":
-            case "":
                 elementType = AnnotatedElement.TYPE_METHOD;
                 break;
+
             case "class":
                 elementType = AnnotatedElement.TYPE_CLASS;
                 break;
+
             case "let":
             case "const":
             case "var":
                 elementType = AnnotatedElement.TYPE_VARIABLE;
                 break;
+        }
+        if (matchedBlock[2] == undefined) {
+            elementType = AnnotatedElement.TYPE_METHOD;
         }
 
         elementName = matchedBlock[3];
