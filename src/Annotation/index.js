@@ -12,7 +12,7 @@ class Annotation {
     value() { return this.value; }
     objectOf() { return this.objectOf; }
 
-    set(name, value) {
+    _set(name, value) {
         if (name !== "value" && typeof this[name] !== "function") {
             let err = new Error("Invalid Argument "+name);
 

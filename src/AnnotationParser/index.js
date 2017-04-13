@@ -49,7 +49,7 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
                     while (matchedArg = argsRegex.exec(matchedAnnotation[2])) {
                         argsCount++;
 
-                        cAnnotation.set(matchedArg[1], matchedArg[2]);
+                        cAnnotation._set(matchedArg[1], matchedArg[2]);
                     }
 
                     if (matchedAnnotation[2] == "" || (argsCount == 0 && matchedAnnotation[2] != "")) {
@@ -59,7 +59,7 @@ module.exports.parse = (filePath, annotationsPath, cb) => {
                             value = value.substr(1, value.length-2);
                         }
 
-                        cAnnotation.set("value", value);
+                        cAnnotation._set("value", value);
                     }
                 } catch (e) {
                     err = e;
