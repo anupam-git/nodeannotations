@@ -7,11 +7,9 @@ try {
     annotatedElements.forEach((annotatedElement) => {
         console.log(annotatedElement.getName()+" : "+annotatedElement.getType());
 
-        let elementAnnotations = annotatedElement.getAnnotations();
-
-        for (let i in elementAnnotations) {
-            console.log("\t"+JSON.stringify(elementAnnotations[i]));
-        }
+        annotatedElement.getAnnotations().forEach((annotation) => {
+            console.log("\t"+JSON.stringify(annotation));
+        });
 
         console.log();
     });
