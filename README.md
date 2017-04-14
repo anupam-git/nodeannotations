@@ -138,7 +138,7 @@ Parses a file for Annotations and returns [`annotatedElements`](#annotatedelemen
 * `annotationsPath` is the Absolute Path of Directory containing all the `Annotation` Classes.
 
 ### `annotatedElements`
-`annotatedElements` is the result returned after parsing the file with path `filePath`. `annotatedElements` is the array of all the elements that are Annotated with the Annotations available at `annotationsPath`. The Array Object also has method [`filterBy(objectOf)`](#)
+`annotatedElements` is the result returned after parsing the file with path `filePath`. `annotatedElements` is the array of all the elements that are Annotated with the Annotations available at `annotationsPath`. The Array Object also has method [`filterBy(objectOf)`](#filterbyobjectof)
 
 ### `filterBy(objectOf)`
 `filterBy` returns the array of Elements Annotated with `objectOf` type of `Annotation`
