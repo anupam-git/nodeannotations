@@ -191,7 +191,7 @@ function test() {
 
 
 ### `Annotation.objectOf`
-Stores the type of the of the `Annotation`
+Stores the type of the `Annotation`
 ```javascript
 /**
  * @Annotation("someValue")
