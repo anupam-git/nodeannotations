@@ -4,6 +4,7 @@
 
 ## Table of Contents
 * [Getting Started](#getting-started)
+* [How To](#how-to)
 * [Class : Annotation(objectOf)](#class--annotation)
     * [Annotation.value](#annotationvalue)
     * [Annotation.[param]](#annotationparam)
@@ -26,6 +27,137 @@
 `npm install`
 * Test the Parser  
 `node testParser.js`
+
+# How to
+### Installing `nodeannotations`
+    npm install nodeannotations --save
+
+### Creating a Custom Annotation
+Create the annotations and place them in a folder, say `[project root]/myannotations`  
+
+**_myannotations/Path.js_**
+```javascript
+const {Annotation} = require("nodeannotations");
+
+class Path extends Annotation {
+    constructor() {
+        super("Path");
+    }
+
+    dir() { return this.dir; }
+    param() { return this.param; }
+}
+
+module.exports = Path;
+```
+
+**_myannotations/Request.js_**
+```javascript
+const {Annotation} = require("nodeannotations");
+
+class Request extends Annotation {
+    constructor() {
+        super("Request");
+    }
+}
+
+module.exports = Request;
+```
+
+### Creating an Annotated File using Custom Annotations
+**_annotatedFile.js_**
+```javascript
+/**
+ * @Request("/controller/endpoint/param")
+ * @Path(dir="/home/user1", param="somevalue")
+ */
+function test() {
+    // Function Body
+}
+
+/**
+ * @Request("/controller1/endpoint1/param1")
+ */
+class Test {
+    constructor() {
+        /**
+         * @Request("/controller2/endpoint2/param2")
+         */
+        let a;
+
+        /**
+         * @Path(dir="/home/user2", param="someothervalue")
+         */
+        const b;
+
+        /**
+         * @Request("/controller3/endpoint3/param3")
+         */
+        var c;
+    }
+
+    /**
+     * @Path(dir="/home", param="test123")
+     */
+    testFunction(req) {
+        // Function Body
+    }
+}
+```
+### Parsing an Annotated File
+Parse the annotated file by calling `parse` function with arguments 
+* `filePath` : Path of the Annotated File to be Parsed. In this case, it should be the absolute path to the `annotatedFile.js` file.
+* `annotationsPath` : Path of the directory containing the Annotations. In this case, it should be the absolute path to the `myannotations` directory.
+```javascript
+const {AnnotationParser} = require("nodeannotations");
+
+try {
+    let annotatedElements = AnnotationParser.parse(__dirname+"/annotatedFile.js", __dirname+"/myannotations/");
+
+    console.log("Example to Loop through all the annotated Elements :");
+
+    // Loop through all elements (Class, Method, Variable) that are annotated
+    annotatedElements.forEach((annotatedElement) => {
+        console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
+
+        // Loop and Print All annotations of the current Element
+        annotatedElement.getAnnotations().forEach((annotation) => {
+            console.log("\t\t"+JSON.stringify(annotation));
+        });
+
+        console.log();
+    });
+
+    console.log("\n\nExample to Loop through the elements which are annotated with @Path() :");
+
+    // Loop through the elements which are annotated with @Request()
+    annotatedElements.filterBy("Request").forEach((annotatedElement) => {
+        console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
+
+        // Loop and Print All annotations of the current Element        
+        annotatedElement.getAnnotations().forEach((annotation) => {
+            console.log("\t\t"+JSON.stringify(annotation));
+        });
+
+        console.log();
+    });
+
+    console.log("\n\nExample to Loop through the elements which are annotated with @Path():");
+
+    // Loop through the elements which are annotated with @Path()
+    annotatedElements.filterBy("Path").forEach((annotatedElement) => {
+        console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
+
+        // Loop and Print the "dir" value of the @Path annotation
+        console.log("\t\tdir: "+annotatedElement.getAnnotation("Path").dir);
+
+        console.log();
+    });
+} catch (err) {
+    console.log(err);
+}
+```
+### Find the Complete Example Here : [nodeannotations-example](https://github.com/anupam-git/nodeannotations-example)
 
 # Class : Annotation
 ### `Annotation.value`
