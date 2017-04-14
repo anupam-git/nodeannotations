@@ -34,7 +34,7 @@
 
 # How to
 ### Installing `nodeannotations`
-    npm install nodeannotations --save
+    npm install --save nodeannotations
 
 ### Creating a Custom Annotation
 Create the annotations and place them in a folder, say `[project root]/myannotations`  
