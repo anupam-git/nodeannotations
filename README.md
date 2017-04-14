@@ -5,6 +5,10 @@
 ## Table of Contents
 * [Getting Started](#getting-started)
 * [How To](#how-to)
+    * [Installing `nodeannotations`](#installing-nodeannotations)
+    * [Creating a Custom Annotation](#creating-a-custom-annotation)
+    * [Creating an Annotated File using Custom Annotations](#creating-an-annotated-file-using-custom-annotations)
+    * [Parsing an Annotated File](#parsing-an-annotated-file)
 * [Class : Annotation(objectOf)](#class--annotation)
     * [Annotation.value](#annotationvalue)
     * [Annotation.[param]](#annotationparam)
