@@ -17,7 +17,7 @@
     * [AnnotatedElement.TYPE_METHOD](#annotatedelementtype_method)
     * [AnnotatedElement.TYPE_VARIABLE](#annotatedelementtype_variable)
 * [AnnotationParser](#annotationparser)
-    * [AnnotationParser.parse(filePath, annotationsPath, callback)](#annotationparserparsefilepath-annotationspath-callback)
+    * [AnnotationParser.parse(filePath, annotationsPath)](#annotationparserparsefilepath-annotationspath)
 
 # Getting Started
 * Clone the example repository  
