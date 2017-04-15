@@ -1,7 +1,7 @@
 {
   "name": "nodeannotations",
   "version": "1.0.0",
-  "description": "NodeJS Support for Annotations",
+  "description": "Annotations Support for NodeJS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
     "annotations"
   ],
   "author": "Anupam Basak",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/anupam-git/nodeannotations/issues"
   },
