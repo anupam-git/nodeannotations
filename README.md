@@ -2,18 +2,18 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/anupam-git/nodeannotations/master/LICENSE) [![npm version](https://badge.fury.io/js/nodeannotations.svg)](https://badge.fury.io/js/nodeannotations) [![GitHub stars](https://img.shields.io/github/stars/anupam-git/nodeannotations.svg)](https://github.com/anupam-git/nodeannotations/stargazers)
 
 
-## Table of Contents
+# Table of Contents
 * [Getting Started](#getting-started)
 * [How To](#how-to)
     * [Installing `nodeannotations`](#installing-nodeannotations)
     * [Creating a Custom Annotation](#creating-a-custom-annotation)
     * [Creating an Annotated File using Custom Annotations](#creating-an-annotated-file-using-custom-annotations)
     * [Parsing an Annotated File](#parsing-an-annotated-file)
-* [Class : Annotation(objectOf)](#class--annotation)
+* [Class : Annotation](#class--annotation)
     * [Annotation.value](#annotationvalue)
     * [Annotation.[param]](#annotationparam)
     * [Annotation.objectOf](#annotationobjectof)
-* [Class : AnnotatedElement(name, type, annotations)](#class--annotatedelement)
+* [Class : AnnotatedElement](#class--annotatedelement)
     * [AnnotatedElement.getName()](#annotatedelementgetname)
     * [AnnotatedElement.getType()](#annotatedelementgettype)
     * [AnnotatedElement.getAnnotation(objectOf)](#annotatedelementgetannotationobjectof)
@@ -26,7 +26,8 @@
 
 # Getting Started
 * Clone the example repository  
-`git clone git@github.com:anupam-git/nodeannotations-example.git`
+SSH : `git clone git@github.com:anupam-git/nodeannotations-example.git`  
+HTTPS : `git clone https://github.com/anupam-git/nodeannotations-example.git`
 * Install Dependencies  
 `npm install`
 * Test the Parser  
@@ -121,6 +122,28 @@ try {
     console.log("Example to Loop through all the annotated Elements :");
 
     // Loop through all elements (Class, Method, Variable) that are annotated
+    /*
+        OUTPUT :
+            test : Method
+                {"value":"","objectOf":"Simple"}
+                {"value":"/controller/endpoint/param","objectOf":"Request"}
+                {"value":null,"objectOf":"Path","dir":"/home/user1","param":"somevalue"}
+
+            Test : Class
+                    {"value":"/controller1/endpoint1/param1","objectOf":"Request"}
+
+            a : Variable
+                    {"value":"/controller2/endpoint2/param2","objectOf":"Request"}
+
+            b : Variable
+                    {"value":null,"objectOf":"Path","dir":"/home/user2","param":"someothervalue"}
+
+            c : Variable
+                    {"value":"/controller3/endpoint3/param3","objectOf":"Request"}
+
+            testFunction : Method
+                    {"value":null,"objectOf":"Path","dir":"/home","param":"test123"}
+    */
     annotatedElements.forEach((annotatedElement) => {
         console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
 
@@ -135,6 +158,22 @@ try {
     console.log("\n\nExample to Loop through the elements which are annotated with @Path() :");
 
     // Loop through the elements which are annotated with @Request()
+    /*
+        OUTPUT :
+            test : Method
+                {"value":"","objectOf":"Simple"}
+                {"value":"/controller/endpoint/param","objectOf":"Request"}
+                {"value":null,"objectOf":"Path","dir":"/home/user1","param":"somevalue"}
+
+            Test : Class
+                    {"value":"/controller1/endpoint1/param1","objectOf":"Request"}
+
+            a : Variable
+                    {"value":"/controller2/endpoint2/param2","objectOf":"Request"}
+
+            c : Variable
+                    {"value":"/controller3/endpoint3/param3","objectOf":"Request"}
+    */
     annotatedElements.filterBy("Request").forEach((annotatedElement) => {
         console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
 
@@ -149,6 +188,17 @@ try {
     console.log("\n\nExample to Loop through the elements which are annotated with @Path():");
 
     // Loop through the elements which are annotated with @Path()
+    /*
+        OUTPUT :
+            test : Method
+                dir: /home/user1
+
+            b : Variable
+                    dir: /home/user2
+
+            testFunction : Method
+                    dir: /home
+    */
     annotatedElements.filterBy("Path").forEach((annotatedElement) => {
         console.log("\t"+annotatedElement.getName()+" : "+annotatedElement.getType());
 
