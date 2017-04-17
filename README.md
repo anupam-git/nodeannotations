@@ -1,6 +1,15 @@
 # NodeAnnotations
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/anupam-git/nodeannotations/master/LICENSE) [![npm version](https://badge.fury.io/js/nodeannotations.svg)](https://badge.fury.io/js/nodeannotations) [![GitHub stars](https://img.shields.io/github/stars/anupam-git/nodeannotations.svg)](https://github.com/anupam-git/nodeannotations/stargazers)
 
+`nodeannotations` is a library to bring the support of Annotations in NodeJS.
+
+`nodeannotations` provides a set of functions and classes to parse any annotated file.  
+It can be used to develop other libraries which can use Annotation to achieve dynamic and hassel-free Class, Method or Variable Level configurations.
+
+
+# Projects Using nodeannotations
+<p align="center"><a href="https://github.com/anupam-git/simplyrest"><img src='https://gist.githubusercontent.com/anupam-git/98bf94fd620531377ad4a0fb0d7b558b/raw/aab89e914cf8ade823993613f7706448a4b69991/simplyrest.png'></a></p>
+
 
 # Table of Contents
 * [Getting Started](#getting-started)
